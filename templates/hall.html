@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Выбор мест{% endblock %}
+
+{% block content %}
+<h2>{{ show.film_title }} — Зал {{ show.hall_number }}</h2>
+<p>{{ show.start_time.strftime('%d.%m.%Y %H:%M') }}</p>
+
+<form action="{{ url_for('create_booking') }}" method="post">
+    <input type="hidden" name="show_id" value="{{ show.id }}">
+    <div class="screen">Экран</div>
+    <div class="seats-grid">
+        {% for seat in seats %}
+        <button 
+            type="submit" 
+            name="seat_id" 
+            value="{{ seat.id }}"
+            class="seat {% if seat.is_booked %}seat--booked{% endif %}"
+            {% if seat.is_booked %}disabled{% endif %}>
+            {{ seat.row }}{{ seat.number }}
+        </button>
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn btn--primary">Забронировать выбранное место</button>
+</form>
+{% endblock %}

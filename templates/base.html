@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Кинотеатр{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ url_for('index') }}">Афиша</a>
+            {% if current_user %}
+                <a href="{{ url_for('profile') }}">Профиль</a>
+                <form action="{{ url_for('logout') }}" method="post" style="display:inline;">
+                    <button type="submit">Выйти</button>
+                </form>
+            {% else %}
+                <a href="{{ url_for('login') }}">Войти</a>
+                <a href="{{ url_for('register') }}">Регистрация</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Simple Cinema</p>
+    </footer>
+</body>
+</html>

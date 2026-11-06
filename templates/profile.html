@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Мой профиль{% endblock %}
+
+{% block content %}
+    <h1>Мои бронирования</h1>
+
+    {% if bookings %}
+        <div class="bookings-list">
+            {% for booking in bookings %}
+                <div class="booking-card">
+                    <h4>{{ booking.show.film_title }}</h4>
+                    <p>Место: {{ booking.seat.row }}{{ booking.seat.number }}</p>
+                    <p>Зал: {{ booking.show.hall.number }}</p>
+                    <p>Сеанс: {{ booking.show.start_time.strftime('%d.%m.%Y %H:%M') }}</p>
+                    <p>Статус: <strong>{{ booking.status }}</strong></p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>У вас пока нет забронированных мест.</p>
+    {% endif %}
+{% endblock %}

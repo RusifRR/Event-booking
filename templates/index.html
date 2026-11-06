@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Афиша{% endblock %}
+
+{% block content %}
+<h1>Сейчас в кино</h1>
+<div class="movies-grid">
+    {% for show in shows %}
+    <div class="movie-card">
+        <h3>{{ show.film_title }}</h3>
+        <p>Зал {{ show.hall_number }}, {{ show.start_time.strftime('%d.%m %H:%M') }}</p>
+        <a href="{{ url_for('show_hall', show_id=show.id) }}" class="btn">Выбрать места</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Бронь подтверждена{% endblock %}
+
+{% block content %}
+    <h1>Готово!</h1>
+    <p>Место забронировано.</p>
+
+    <div class="ticket">
+        <h3>{{ show.film_title }}</h3>
+        <p>Место: {{ seat.row }}{{ seat.number }}</p>
+        <p>Зал: {{ show.hall.number }}</p>
+        <p>Время: {{ show.start_time.strftime('%d.%m.%Y %H:%M') }}</p>
+        <p><strong>ID брони: {{ booking.id }}</strong></p>
+    </div>
+
+    <a href="{{ url_for('index') }}" class="btn">Вернуться к афише</a>
+    <a href="{{ url_for('profile') }}" class="btn">Мои билеты</a>
+{% endblock %}
